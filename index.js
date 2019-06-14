@@ -13,7 +13,16 @@ mongoose.set("debug", true);
 mongoose.Promise = global.Promise;
 //notice you need to update this with your own database
 
-startWebServer();
+mongoose.connect(process.env.mongodburi, {useNewUrlParser: true}).then(
+  () => { 
+    console.log("mongoose connected successfully");
+   
+    startWebServer();
+  },
+  err => {
+    console.log("mongoose did not connect",err);
+   }
+);
 
 
 
